@@ -4,12 +4,14 @@ import Modal from "../modal/Modal";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { ArrowDownIcon } from "../icons";
 import { useBoardContext } from "../../context";
+import EditTaskForm from "../forms/EditTaskForm";
 
 const Row = ({ title, description, status, subtasks }: TaskProps) => {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showStatusList, setShowStatusList] = useState(false);
   const { activeBoardColums } = useBoardContext();
+  const [showEditTaskForm, setShowEditTaskForm] = useState(false);
 
   const statuses = activeBoardColums.map(({ name }) => ({ name }));
 
@@ -39,7 +41,10 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
         }}
         type="full"
       >
-        <div className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md h-[95%] overflow-y-auto">
+        <div
+          className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md h-[95%] overflow-y-auto"
+          onClick={(e: any) => e.stopPropagation()}
+        >
           <div className="header_section flex space-x-4 justify-between items-center relative mb-4">
             <h3 className="font-bold text-lg dark:text-white">{title}</h3>
             <div>
@@ -54,7 +59,7 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
             </div>
             {showDropdown && (
               <div className="text-gray-medium font-base p-4 space-y-4 absolute drop-shadow cursor-pointer top-16 md:top-12 right-0 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap">
-                <p>Edit Task</p>
+                <p onClick={() => setShowEditTaskForm(true)}>Edit Task</p>
                 <p className="text-[#EA5555]">Delete Task</p>
               </div>
             )}
@@ -110,6 +115,29 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
               </div>
             )}
           </div>
+        </div>
+      </Modal>
+
+      <Modal
+        showModal={showEditTaskForm}
+        onClick={() => {
+          setShowEditTaskForm(false);
+          setShowTaskDetails(false);
+          setShowStatusList(false);
+          setShowDropdown(false);
+        }}
+        type="full"
+      >
+        <div
+          className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md h-[95%] overflow-y-auto"
+          onClick={(e: any) => e.stopPropagation()}
+        >
+          <EditTaskForm
+            title={title}
+            description={description}
+            subtasks={subtasks}
+            status={status}
+          />
         </div>
       </Modal>
     </React.Fragment>

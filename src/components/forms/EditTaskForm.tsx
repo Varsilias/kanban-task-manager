@@ -7,15 +7,30 @@ import SecondaryButton from "../buttons/SecondaryButton";
 import { ArrowDownIcon } from "../icons";
 import { useBoardContext } from "../../context";
 
-const AddTaskForm = () => {
+interface IEditTaskProps {
+  title: string;
+  description: string;
+  subtasks: {
+    title: string;
+    isCompleted: boolean;
+  }[];
+  status: string;
+}
+
+const EditTaskForm = ({
+  title,
+  description,
+  subtasks,
+  status,
+}: IEditTaskProps) => {
   const [showStatusList, setShowStatusList] = useState(false);
   const { activeBoardColums } = useBoardContext();
   const statuses = activeBoardColums.map(({ name }) => ({ name }));
 
   const [initialValues, setInitialValues] = useState({
-    title: "",
-    description: "",
-    subtasks: ["", ""],
+    title: title,
+    description: description,
+    subtasks: subtasks.map(({ title }) => title),
   });
 
   const formik = useFormik({
@@ -169,7 +184,10 @@ const AddTaskForm = () => {
                 setShowStatusList(!showStatusList);
               }}
             >
-              <p>{statuses[0].name}</p>
+              <p>
+                {statuses.find(({ name }) => name === status)?.name ||
+                  statuses[0].name}
+              </p>
               <div>
                 <ArrowDownIcon />
               </div>
@@ -193,4 +211,4 @@ const AddTaskForm = () => {
   );
 };
 
-export default AddTaskForm;
+export default EditTaskForm;
