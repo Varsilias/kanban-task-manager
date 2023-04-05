@@ -13,7 +13,7 @@ const SecondaryButton: React.FC<PropsWithChildren<ISecondaryButtonProps>> = ({
     <button
       type="button"
       onClick={onClick}
-      className={`flex w-full justify-center font-bold cursor-pointer text-purple-primary  bg-purple-hover text-bold text-sm px-4 py-2 rounded-[20px] ${
+      className={`flex w-full justify-center font-bold cursor-pointer bg-opacity-10 dark:bg-white dark:bg-opacity-100 text-purple-primary hover:bg-opacity-25  bg-[#635FC7] text-bold text-sm px-4 py-2 rounded-[20px] ${
         disabled
           ? "opacity-50 cursor-not-allowed"
           : "opacity-100 cursor-pointer"

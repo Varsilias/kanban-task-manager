@@ -4,6 +4,7 @@ import ThemeSwitcher from "../themeswitcher";
 import Modal from "../modal/Modal";
 import data from "../../data.json";
 import { useBoardContext } from "../../context/BoardContext";
+import AddNewBoard from "../forms/AddNewBoard";
 
 const BoardDropDown = () => {
   const { boards, setSelectedBoard, selectedBoard } = useBoardContext();
@@ -13,6 +14,7 @@ const BoardDropDown = () => {
   // const [boardCount, setBoardCount] = useState(boards.length);
   // const [activeBoard, setActiveBoard] = useState({ ...selectedBoard });
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showCreateBoardForm, setShowCreateBoardForm] = useState(false);
 
   return (
     <div className="relative">
@@ -31,7 +33,10 @@ const BoardDropDown = () => {
         showModal={showDropdown}
         onClick={() => setShowDropdown(false)}
       >
-        <div className="absolute bg-white py-4 rounded-md top-4 w-[250px] dark:bg-gray-dark">
+        <div
+          className="absolute bg-white py-4 rounded-md top-4 w-[250px] dark:bg-gray-dark"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div>
             <h3 className="mb-4 px-6 text-gray-medium text-sm font-normal uppercase">
               All Boards ({boards.length})
@@ -63,7 +68,10 @@ const BoardDropDown = () => {
             </div>
 
             <div className="add_new_board">
-              <div className="flex items-center space-x-2 mb-4 px-6 text-purple-primary font-medium">
+              <div
+                className="flex items-center space-x-2 mb-4 px-6 text-purple-primary font-medium"
+                onClick={() => setShowCreateBoardForm(true)}
+              >
                 <BoardIcon />
                 <h4>+ Create New Board</h4>
               </div>
@@ -73,6 +81,22 @@ const BoardDropDown = () => {
               <ThemeSwitcher />
             </div>
           </div>
+        </div>
+      </Modal>
+
+      <Modal
+        showModal={showCreateBoardForm}
+        onClick={() => {
+          setShowCreateBoardForm(false);
+          setShowDropdown(false);
+        }}
+        type="full"
+      >
+        <div
+          className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md h-[95%] overflow-y-auto"
+          onClick={(e: any) => e.stopPropagation()}
+        >
+          <AddNewBoard />
         </div>
       </Modal>
     </div>

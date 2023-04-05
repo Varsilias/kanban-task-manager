@@ -9,12 +9,22 @@ import { useFullScreenContext } from "../../context/FullScreenContext";
 import LogoComponent from "../LogoComponent";
 import Modal from "../modal/Modal";
 import AddTaskForm from "../forms/AddTaskForm";
+import EditBoardForm from "../forms/EditBoardForm";
+import Popup from "../forms/Popup";
+import useClickOutside from "../hooks/useClickOutside";
 
 const MainNavBar = () => {
   const { selectedBoard, boardCount } = useBoardContext();
   const [showDropdown, setShowDropdown] = useState(false);
   const { fullScreenEnabled } = useFullScreenContext();
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const [showEditBoardForm, setShowEditBoardForm] = useState(false);
+  const [showDeleteBoardModal, setShowDeleteBoardModal] = useState(false);
+  const { ref } = useClickOutside({
+    onClickOutside() {
+      setShowDropdown(false);
+    },
+  });
 
   return (
     <nav className="w-full bg-white px-4 py-6 drop-shadow-md dark:bg-gray-dark sticky top-0">
@@ -66,9 +76,17 @@ const MainNavBar = () => {
               }}
             />
             {showDropdown && (
-              <div className="text-gray-medium font-base p-4 space-y-4 absolute cursor-pointer top-12 -left-24 md:-left-2 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap">
-                <p>Edit Board</p>
-                <p className="text-[#EA5555]">Delete Board</p>
+              <div
+                className="text-gray-medium font-base p-4 space-y-4 absolute cursor-pointer top-12 -left-24 md:-left-2 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap"
+                ref={ref}
+              >
+                <p onClick={() => setShowEditBoardForm(true)}>Edit Board</p>
+                <p
+                  onClick={() => setShowDeleteBoardModal(true)}
+                  className="text-[#EA5555]"
+                >
+                  Delete Board
+                </p>
               </div>
             )}
           </div>
@@ -86,6 +104,45 @@ const MainNavBar = () => {
             onClick={(e: any) => e.stopPropagation()}
           >
             <AddTaskForm />
+          </div>
+        </Modal>
+
+        <Modal
+          showModal={showEditBoardForm}
+          onClick={() => {
+            setShowEditBoardForm(false);
+            setShowDropdown(false);
+          }}
+          type="full"
+        >
+          <div
+            className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md h-[95%] overflow-y-auto"
+            onClick={(e: any) => e.stopPropagation()}
+          >
+            <EditBoardForm />
+          </div>
+        </Modal>
+
+        <Modal
+          showModal={showDeleteBoardModal}
+          onClick={() => {
+            setShowDeleteBoardModal(false);
+            setShowDropdown(false);
+          }}
+          type="full"
+        >
+          <div
+            className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md md:h-[229px] h-[284px] overflow-y-auto"
+            onClick={(e: any) => e.stopPropagation()}
+          >
+            <Popup
+              name={`'${selectedBoard.name}'`}
+              type="board"
+              onClick={() => {
+                setShowDeleteBoardModal(false);
+                setShowDropdown(false);
+              }}
+            />
           </div>
         </Modal>
       </div>

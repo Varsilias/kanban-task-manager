@@ -85,7 +85,7 @@ const EditTaskForm = ({
     <FormikProvider value={formik}>
       <Form onSubmit={handleSubmit}>
         <h2 className="text-black font-bold text-lg mb-6 dark:text-white">
-          Add New Task
+          Edit Task
         </h2>
         <div className="title flex flex-col mb-4">
           <label

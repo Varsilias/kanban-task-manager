@@ -5,6 +5,8 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { ArrowDownIcon } from "../icons";
 import { useBoardContext } from "../../context";
 import EditTaskForm from "../forms/EditTaskForm";
+import Popup from "../forms/Popup";
+import useClickOutside from "../hooks/useClickOutside";
 
 const Row = ({ title, description, status, subtasks }: TaskProps) => {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
@@ -12,6 +14,12 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
   const [showStatusList, setShowStatusList] = useState(false);
   const { activeBoardColums } = useBoardContext();
   const [showEditTaskForm, setShowEditTaskForm] = useState(false);
+  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+  const { ref } = useClickOutside({
+    onClickOutside() {
+      setShowDropdown(false);
+    },
+  });
 
   const statuses = activeBoardColums.map(({ name }) => ({ name }));
 
@@ -58,9 +66,17 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
               />
             </div>
             {showDropdown && (
-              <div className="text-gray-medium font-base p-4 space-y-4 absolute drop-shadow cursor-pointer top-16 md:top-12 right-0 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap">
+              <div
+                className="text-gray-medium font-base p-4 space-y-4 absolute drop-shadow cursor-pointer top-16 md:top-12 right-0 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap"
+                ref={ref}
+              >
                 <p onClick={() => setShowEditTaskForm(true)}>Edit Task</p>
-                <p className="text-[#EA5555]">Delete Task</p>
+                <p
+                  className="text-[#EA5555]"
+                  onClick={() => setShowDeleteTaskModal(true)}
+                >
+                  Delete Task
+                </p>
               </div>
             )}
           </div>
@@ -137,6 +153,29 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
             description={description}
             subtasks={subtasks}
             status={status}
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        showModal={showDeleteTaskModal}
+        onClick={() => {
+          setShowDeleteTaskModal(false);
+          setShowDropdown(false);
+        }}
+        type="full"
+      >
+        <div
+          className="w-[90%] md:w-2/4 p-6 bg-white dark:bg-gray-dark rounded-md md:h-[229px] h-[284px] overflow-y-auto"
+          onClick={(e: any) => e.stopPropagation()}
+        >
+          <Popup
+            name={`'${title}'`}
+            type="task"
+            onClick={() => {
+              setShowDeleteTaskModal(false);
+              setShowDropdown(false);
+            }}
           />
         </div>
       </Modal>
