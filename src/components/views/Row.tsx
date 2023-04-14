@@ -6,7 +6,7 @@ import { ArrowDownIcon } from "../icons";
 import { useBoardContext } from "../../context";
 import EditTaskForm from "../forms/EditTaskForm";
 import Popup from "../forms/Popup";
-import useClickOutside from "../hooks/useClickOutside";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const Row = ({ title, description, status, subtasks }: TaskProps) => {
   const [showTaskDetails, setShowTaskDetails] = useState(false);

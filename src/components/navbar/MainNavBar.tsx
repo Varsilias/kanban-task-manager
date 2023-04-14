@@ -11,7 +11,7 @@ import Modal from "../modal/Modal";
 import AddTaskForm from "../forms/AddTaskForm";
 import EditBoardForm from "../forms/EditBoardForm";
 import Popup from "../forms/Popup";
-import useClickOutside from "../hooks/useClickOutside";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const MainNavBar = () => {
   const { selectedBoard, boardCount } = useBoardContext();
