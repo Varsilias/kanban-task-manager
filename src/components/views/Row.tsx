@@ -15,11 +15,18 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
   const { activeBoardColums } = useBoardContext();
   const [showEditTaskForm, setShowEditTaskForm] = useState(false);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+
   const { ref } = useClickOutside({
     onClickOutside() {
       setShowDropdown(false);
     },
   });
+
+  // const ref = useDetectClickOutside({
+  //   onTriggered: () => {
+  //     setShowDropdown(false);
+  //   },
+  // });
 
   const statuses = activeBoardColums.map(({ name }) => ({ name }));
 
@@ -55,30 +62,34 @@ const Row = ({ title, description, status, subtasks }: TaskProps) => {
         >
           <div className="header_section flex space-x-4 justify-between items-center relative mb-4">
             <h3 className="font-bold text-lg dark:text-white">{title}</h3>
-            <div>
+            <div
+              ref={ref}
+              onClick={(e) => {
+                setShowDropdown(!showDropdown);
+              }}
+            >
               <IoEllipsisVertical
                 size={20}
                 className="text-gray-medium cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowDropdown(!showDropdown);
-                }}
               />
+              {showDropdown && (
+                <div className="text-gray-medium font-base p-4 space-y-4 absolute drop-shadow cursor-pointer top-16 md:top-12 right-0 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap">
+                  <p
+                    onClick={() => {
+                      setShowEditTaskForm(true);
+                    }}
+                  >
+                    Edit Task
+                  </p>
+                  <p
+                    className="text-[#EA5555]"
+                    onClick={() => setShowDeleteTaskModal(true)}
+                  >
+                    Delete Task
+                  </p>
+                </div>
+              )}
             </div>
-            {showDropdown && (
-              <div
-                className="text-gray-medium font-base p-4 space-y-4 absolute drop-shadow cursor-pointer top-16 md:top-12 right-0 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap"
-                ref={ref}
-              >
-                <p onClick={() => setShowEditTaskForm(true)}>Edit Task</p>
-                <p
-                  className="text-[#EA5555]"
-                  onClick={() => setShowDeleteTaskModal(true)}
-                >
-                  Delete Task
-                </p>
-              </div>
-            )}
           </div>
           <div className="description mb-4">
             <p className="text-gray-medium font-medium text-[13px]">

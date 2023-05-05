@@ -68,27 +68,28 @@ const MainNavBar = () => {
                 <div className="hidden md:block">Add New Task</div>
               </div>
             </ActionButton>
-            <IoEllipsisVertical
-              size={35}
-              className="text-gray-medium cursor-pointer"
+            <div
+              ref={ref}
               onClick={() => {
                 setShowDropdown(!showDropdown);
               }}
-            />
-            {showDropdown && (
-              <div
-                className="text-gray-medium font-base p-4 space-y-4 absolute cursor-pointer top-12 -left-24 md:-left-2 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap"
-                ref={ref}
-              >
-                <p onClick={() => setShowEditBoardForm(true)}>Edit Board</p>
-                <p
-                  onClick={() => setShowDeleteBoardModal(true)}
-                  className="text-[#EA5555]"
-                >
-                  Delete Board
-                </p>
-              </div>
-            )}
+            >
+              <IoEllipsisVertical
+                size={35}
+                className="text-gray-medium cursor-pointer"
+              />
+              {showDropdown && (
+                <div className="text-gray-medium font-base p-4 space-y-4 absolute cursor-pointer top-12 -left-24 md:-left-2 rounded-lg w-[180px] bg-white dark:bg-gray-very-dark whitespace-nowrap">
+                  <p onClick={() => setShowEditBoardForm(true)}>Edit Board</p>
+                  <p
+                    onClick={() => setShowDeleteBoardModal(true)}
+                    className="text-[#EA5555]"
+                  >
+                    Delete Board
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
