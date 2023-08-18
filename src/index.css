@@ -60,7 +60,7 @@
 /* CUSTOM SCROLL BAR */
 @media (min-width: 1280px) {
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
     height: 10px;
   }
 
@@ -107,7 +107,7 @@
 /* CUSTOM SCROLL BAR */
 @media (min-width: 1600px) {
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
     height: 10px;
   }
 
@@ -154,7 +154,7 @@
 /* CUSTOM SCROLL BAR */
 @media (min-width: 780px) {
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
     height: 10px;
   }
 
@@ -201,7 +201,7 @@
 /* CUSTOM SCROLL BAR */
 @media (min-width: 360px) {
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
     height: 10px;
   }
 

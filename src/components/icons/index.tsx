@@ -9,22 +9,8 @@ export const LogoIcon = () => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <rect width="6" height="25" rx="2" fill="#635FC7" />
-        <rect
-          opacity="0.75"
-          x="9"
-          width="6"
-          height="25"
-          rx="2"
-          fill="#635FC7"
-        />
-        <rect
-          opacity="0.5"
-          x="18"
-          width="6"
-          height="25"
-          rx="2"
-          fill="#635FC7"
-        />
+        <rect opacity="0.75" x="9" width="6" height="25" rx="2" fill="#635FC7" />
+        <rect opacity="0.5" x="18" width="6" height="25" rx="2" fill="#635FC7" />
       </svg>
     </>
   );
@@ -75,13 +61,7 @@ export const DarkThemeIcon = () => {
 export const ArrowDownIcon = () => {
   return (
     <>
-      <svg
-        width="9"
-        height="7"
-        viewBox="0 0 9 7"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 1L5 5L9 1" stroke="#635FC7" strokeWidth="2" />
       </svg>
     </>
@@ -91,13 +71,7 @@ export const ArrowDownIcon = () => {
 export const ArrowUpIcon = () => {
   return (
     <>
-      <svg
-        width="10"
-        height="7"
-        viewBox="0 0 10 7"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 6L5 2L9 6" stroke="#635FC7" strokeWidth="2" />
       </svg>
     </>
@@ -156,21 +130,30 @@ export const CancelIcon = () => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x="12.728"
-          width="3"
-          height="18"
-          transform="rotate(45 12.728 0)"
-          fill="#828FA3"
-        />
-        <rect
-          y="2.12109"
-          width="3"
-          height="18"
-          transform="rotate(-45 0 2.12109)"
-          fill="#828FA3"
-        />
+        <rect x="12.728" width="3" height="18" transform="rotate(45 12.728 0)" fill="#828FA3" />
+        <rect y="2.12109" width="3" height="18" transform="rotate(-45 0 2.12109)" fill="#828FA3" />
       </svg>
     </>
   );
 };
+
+export const CloseButtonIcon = () => (
+  <div className="smooth my-auto h-full p-3 text-black-60 hover:text-black-100">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 4L4 12"
+        stroke="currentColor"
+        strokeWidth="1.33333"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 4L12 12"
+        stroke="currentColor"
+        strokeWidth="1.33333"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+);
